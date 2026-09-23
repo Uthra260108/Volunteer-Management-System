@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Volunteer Connect</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#333;
+}
+
+/* NAVBAR */
+
+.navbar{
+    background:linear-gradient(135deg,#6a5acd,#8a4fff);
+    color:white;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.nav-buttons button{
+    background:none;
+    border:none;
+    color:white;
+    margin-left:18px;
+    font-size:15px;
+    cursor:pointer;
+}
+
+.nav-buttons button:hover{
+    text-decoration:underline;
+}
+
+/* COMMON */
+
+.page{
+    display:none;
+    min-height:90vh;
+}
+
+.active{
+    display:block;
+}
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+}
+
+/* HOME */
+
+.hero{
+    background:linear-gradient(135deg,#6a5acd,#a64bf4);
+    color:white;
+    padding:80px 20px;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:45px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:18px;
+    max-width:700px;
+    margin:auto;
+    line-height:1.6;
+}
+
+.hero button{
+    margin-top:25px;
+    padding:14px 28px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#6a5acd;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.section-title{
+    text-align:center;
+    margin:40px 0 25px;
+    color:#333;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:25px;
+    padding-bottom:40px;
+}
+
+.card{
+    background:white;
+    padding:30px 20px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+}
+
+.icon{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+.card h3{
+    margin-bottom:10px;
+    font-size:22px;
+}
+
+.card p{
+    color:#666;
+    line-height:1.5;
+    margin-bottom:20px;
+}
+
+.card button,
+.primary-btn{
+    border:none;
+    padding:12px 22px;
+    border-radius:25px;
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.student{
+    border-top:6px solid #ff6b81;
+}
+
+.student button{
+    background:#ff6b81;
+}
+
+.volunteer{
+    border-top:6px solid #4facfe;
+}
+
+.volunteer button{
+    background:#4facfe;
+}
+
+.tech{
+    border-top:6px solid #43d17a;
+}
+
+.tech button{
+    background:#43d17a;
+}
+
+/* INNER PAGES */
+
+.page-header{
+    padding:50px 20px;
+    text-align:center;
+    color:white;
+}
+
+.student-header{
+    background:linear-gradient(135deg,#ff6b81,#ff9a9e);
+}
+
+.volunteer-header{
+    background:linear-gradient(135deg,#4facfe,#00c6ff);
+}
+
+.tech-header{
+    background:linear-gradient(135deg,#43d17a,#20c997);
+}
+
+.page-header h1{
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.content{
+    width:90%;
+    max-width:900px;
+    margin:35px auto;
+}
+
+.info-box{
+    background:white;
+    padding:25px;
+    margin-bottom:20px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+.info-box h2{
+    margin-bottom:15px;
+}
+
+/* FORM */
+
+.form{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+.form label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+.form input,
+.form select,
+.form textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.form button{
+    margin-top:20px;
+    background:#6a5acd;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+/* TECHNOLOGY */
+
+.tech-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.tech-box{
+    padding:25px;
+    background:white;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+.tech-box .icon{
+    font-size:40px;
+}
+
+.tech-box h3{
+    margin:10px 0;
+}
+
+/* ABOUT */
+
+.about{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    margin-top:40px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    line-height:1.7;
+}
+
+/* FOOTER */
+
+footer{
+    background:#25223b;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .navbar{
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .nav-buttons button{
+        margin:5px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .page-header h1{
+        font-size:30px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- NAVIGATION -->
+
+<div class="navbar">
+
+    <div class="logo">
+        💜 Volunteer Connect
+    </div>
+
+    <div class="nav-buttons">
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('students')">Students</button>
+        <button onclick="showPage('volunteers')">Volunteers</button>
+        <button onclick="showPage('technology')">Technology</button>
+        <button onclick="showPage('about')">About</button>
+    </div>
+
+</div>
+
+
+<!-- ================= HOME PAGE ================= -->
+
+<div id="home" class="page active">
+
+    <section class="hero">
+
+        <h1>Volunteer Management System</h1>
+
+        <p>
+            Connecting volunteers with students to provide guidance,
+            learning opportunities and awareness about upcoming technologies.
+        </p>
+
+        <button onclick="showPage('students')">
+            Explore Platform →
+        </button>
+
+    </section>
+
+
+    <div class="container">
+
+        <h2 class="section-title">
+            What would you like to explore?
+        </h2>
+
+        <div class="cards">
+
+
+            <!-- STUDENT -->
+
+            <div class="card student">
+
+                <div class="icon">🎓</div>
+
+                <h3>Students</h3>
+
+                <p>
+                    Get guidance, learning resources and information
+                    about educational and career opportunities.
+                </p>
+
+                <button onclick="showPage('students')">
+                    Student Portal →
+                </button>
+
+            </div>
+
+
+            <!-- VOLUNTEER -->
+
+            <div class="card volunteer">
+
+                <div class="icon">🤝</div>
+
+                <h3>Volunteers</h3>
+
+                <p>
+                    Volunteers can register and support students
+                    through mentoring and guidance.
+                </p>
+
+                <button onclick="showPage('volunteers')">
+                    Volunteer Portal →
+                </button>
+
+            </div>
+
+
+            <!-- TECHNOLOGY -->
+
+            <div class="card tech">
+
+                <div class="icon">💡</div>
+
+                <h3>Technology</h3>
+
+                <p>
+                    Explore upcoming technologies and understand
+                    their importance for future careers.
+                </p>
+
+                <button onclick="showPage('technology')">
+                    Explore Technology →
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="about">
+
+            <h2>Our Objective</h2>
+
+            <p>
+                The objective of this project is to help orphan students
+                by providing proper guidance and introducing them to
+                upcoming technologies. The system aims to connect students
+                with volunteers who can provide educational and career
+                guidance.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= STUDENT PAGE ================= -->
+
+<div id="students" class="page">
+
+    <div class="page-header student-header">
+
+        <h1>🎓 Student Portal</h1>
+
+        <p>
+            Learn, explore and build your future.
+        </p>
+
+    </div>
+
+
+    <div class="content">
+
+        <div class="info-box">
+
+            <h2>📚 Learning Resources</h2>
+
+            <p>
+                Students can access useful learning materials,
+                technology information and career guidance.
+            </p>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <h2>🎯 Career Guidance</h2>
+
+            <p>
+                Learn about different career paths, programming,
+                emerging technologies and educational opportunities.
+            </p>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <h2>📝 Student Registration</h2>
+
+            <p>
+                Register with the system to receive guidance
+                and learning support.
+            </p>
+
+        </div>
+
+
+        <div class="form">
+
+            <h2>Student Registration</h2>
+
+            <label>Name</label>
+            <input type="text" placeholder="Enter your name">
+
+            <label>Age</label>
+            <input type="number" placeholder="Enter your age">
+
+            <label>Area of Interest</label>
+
+            <select>
+                <option>Select an area</option>
+                <option>Programming</option>
+                <option>Artificial Intelligence</option>
+                <option>Web Development</option>
+                <option>Data Science</option>
+                <option>Cyber Security</option>
+            </select>
+
+            <label>Message</label>
+
+            <textarea rows="4"
+                placeholder="What kind of guidance do you need?">
+            </textarea>
+
+            <button onclick="registerStudent()">
+                Register
+            </button>
+
+        </div>
+
+        <br>
+
+        <button class="primary-btn"
+                style="background:#6a5acd;"
+                onclick="showPage('home')">
+
+            ← Back to Home
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= VOLUNTEER PAGE ================= -->
+
+<div id="volunteers" class="page">
+
+    <div class="page-header volunteer-header">
+
+        <h1>🤝 Volunteer Portal</h1>
+
+        <p>
+            Share your knowledge and guide students.
+        </p>
+
+    </div>
+
+
+    <div class="content">
+
+        <div class="info-box">
+
+            <h2>🌟 Why Become a Volunteer?</h2>
+
+            <p>
+                Volunteers can contribute their knowledge,
+                experience and time to help students develop
+                their skills.
+            </p>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <h2>👨‍🏫 What Can Volunteers Do?</h2>
+
+            <p>
+                • Provide academic guidance<br>
+                • Conduct technology awareness sessions<br>
+                • Help students understand career options<br>
+                • Share learning resources<br>
+                • Mentor students
+            </p>
+
+        </div>
+
+
+        <div class="form">
+
+            <h2>Volunteer Registration</h2>
+
+            <label>Name</label>
+
+            <input type="text"
+                   placeholder="Enter your name">
+
+
+            <label>Email</label>
+
+            <input type="email"
+                   placeholder="Enter your email">
+
+
+            <label>Skill / Expertise</label>
+
+            <input type="text"
+                   placeholder="Example: Python, Web Development">
+
+
+            <label>How can you help?</label>
+
+            <textarea rows="4"
+                      placeholder="Describe how you would like to support students">
+            </textarea>
+
+
+            <button onclick="registerVolunteer()">
+                Join as Volunteer
+            </button>
+
+        </div>
+
+        <br>
+
+        <button class="primary-btn"
+                style="background:#6a5acd;"
+                onclick="showPage('home')">
+
+            ← Back to Home
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= TECHNOLOGY PAGE ================= -->
+
+<div id="technology" class="page">
+
+    <div class="page-header tech-header">
+
+        <h1>💡 Technology Hub</h1>
+
+        <p>
+            Discover technologies that can shape the future.
+        </p>
+
+    </div>
+
+
+    <div class="content">
+
+        <h2 class="section-title">
+            Upcoming Technologies
+        </h2>
+
+
+        <div class="tech-grid">
+
+
+            <div class="tech-box">
+
+                <div class="icon">🤖</div>
+
+                <h3>Artificial Intelligence</h3>
+
+                <p>
+                    Learn how machines can solve problems
+                    and make intelligent decisions.
+                </p>
+
+            </div>
+
+
+            <div class="tech-box">
+
+                <div class="icon">☁️</div>
+
+                <h3>Cloud Computing</h3>
+
+                <p>
+                    Understand how applications and data
+                    can be managed through cloud platforms.
+                </p>
+
+            </div>
+
+
+            <div class="tech-box">
+
+                <div class="icon">🔐</div>
+
+                <h3>Cyber Security</h3>
+
+                <p>
+                    Learn how information and systems
+                    can be protected from cyber threats.
+                </p>
+
+            </div>
+
+
+            <div class="tech-box">
+
+                <div class="icon">📊</div>
+
+                <h3>Data Science</h3>
+
+                <p>
+                    Explore how data can be analysed
+                    to find useful information.
+                </p>
+
+            </div>
+
+
+            <div class="tech-box">
+
+                <div class="icon">🌐</div>
+
+                <h3>Web Development</h3>
+
+                <p>
+                    Learn how modern websites and
+                    web applications are created.
+                </p>
+
+            </div>
+
+
+            <div class="tech-box">
+
+                <div class="icon">📱</div>
+
+                <h3>Mobile Applications</h3>
+
+                <p>
+                    Explore how mobile applications
+                    are designed and developed.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <br><br>
+
+        <button class="primary-btn"
+                style="background:#6a5acd;"
+                onclick="showPage('home')">
+
+            ← Back to Home
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= ABOUT PAGE ================= -->
+
+<div id="about" class="page">
+
+    <div class="page-header"
+         style="background:linear-gradient(135deg,#6a5acd,#ff6b81);">
+
+        <h1>About the Project</h1>
+
+        <p>
+            Software Engineering Project
+        </p>
+
+    </div>
+
+
+    <div class="content">
+
+        <div class="about">
+
+            <h2>Volunteer Management System</h2>
+
+            <br>
+
+            <p>
+                The Volunteer Management System is an ongoing
+                Software Engineering project designed to help
+                orphan students by providing guidance and
+                awareness about upcoming technologies.
+            </p>
+
+            <br>
+
+            <p>
+                The proposed system connects students and
+                volunteers through a simple platform where
+                students can receive educational guidance,
+                learning resources and technology awareness.
+            </p>
+
+            <br>
+
+            <h3>Project Status</h3>
+
+            <p>
+                🚧 Ongoing Project
+            </p>
+
+            <br>
+
+            <h3>Planned Features</h3>
+
+            <p>
+                ✓ Student registration<br>
+                ✓ Volunteer registration<br>
+                ✓ Learning resources<br>
+                ✓ Technology awareness<br>
+                ✓ Student-volunteer interaction<br>
+                ✓ Guidance and progress tracking
+            </p>
+
+        </div>
+
+        <br>
+
+        <button class="primary-btn"
+                style="background:#6a5acd;"
+                onclick="showPage('home')">
+
+            ← Back to Home
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        Volunteer Management System © 2026
+    </p>
+
+    <p>
+        Software Engineering Project
+    </p>
+
+</footer>
+
+
+
+<script>
+
+/* PAGE NAVIGATION */
+
+function showPage(pageName){
+
+    let pages = document.querySelectorAll(".page");
+
+    pages.forEach(function(page){
+        page.classList.remove("active");
+    });
+
+    document.getElementById(pageName).classList.add("active");
+
+    window.scrollTo(0,0);
+}
+
+
+/* STUDENT REGISTRATION */
+
+function registerStudent(){
+
+    alert(
+        "Student registration submitted successfully!"
+    );
+
+}
+
+
+/* VOLUNTEER REGISTRATION */
+
+function registerVolunteer(){
+
+    alert(
+        "Thank you for registering as a volunteer!"
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>
